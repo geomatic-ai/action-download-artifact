@@ -15,8 +15,6 @@ async function main() {
         let workflowConclusion = core.getInput("workflow_conclusion")
         let pr = core.getInput("pr")
         let commit = core.getInput("commit")
-        let branch = core.getInput("branch")
-        let event = core.getInput("event")
         let runID = core.getInput("run_id")
         let runNumber = core.getInput("run_number")
         let checkArtifacts = core.getInput("check_artifacts")
@@ -46,15 +44,6 @@ async function main() {
             console.log("==> Commit:", commit)
         }
 
-        if (branch) {
-            branch = branch.replace(/^refs\/heads\//, "")
-            console.log("==> Branch:", branch)
-        }
-
-        if (event) {
-            console.log("==> Event:", event)
-        }
-
         if (runNumber) {
             console.log("==> RunNumber:", runNumber)
         }
@@ -64,8 +53,6 @@ async function main() {
                 owner: owner,
                 repo: repo,
                 workflow_id: workflow,
-                branch: branch,
-                event: event,
             }
             )) {
                 for (const run of runs.data) {
